@@ -1,0 +1,8 @@
+Please insert your name and the idea. Insert bibliographic reference if needed
+
+Sergio:
+  - Useful to investigate characteristic stabilization of the densities over time
+  - Analyze the evolution of the 1D Fourier Transform of the lattice over time to detect how a structure (and what structure)
+      emerges over time, if there are any spatial modes dominating..
+  - Analyze a 2D Fourier transform: if no pattern arise in the simulation, this should result in a nothing but a noise figure
+      otherwise the spatial frequencies of the characteristic pattern for each rule should be visible
