@@ -8,6 +8,8 @@ Hi all! This is just a README file to get oriented into the repository: as we cr
   
 If you want to check a fast Git tutorial: https://www.youtube.com/watch?v=BCQHnlnPusY
 
+Schedule of things done/to be done can be found in the "Wiki" section: it could be useful to use it as a lab journal (if needed)
+
 Have fun!
 
 - brainstorming: an informal collection of ideas for the project
