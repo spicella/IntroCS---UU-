@@ -7,7 +7,7 @@ plt.style.use('seaborn-darkgrid')
 
 # Parameters definition:
 
-f2_W = 30 # f2 rule number
+f2_W = 178 # f2 rule number
 f2_bin = [int(x) for x in np.binary_repr(f2_W, width=8)] # binary representation of f2 rule
 
 #All lambdas to simulate are now included here!
@@ -62,7 +62,9 @@ def plot_space_time_grid(n, T):
     plt.title("Space-time grid for rule $f_{2}$=%d, $\\lambda$=%.2f"%(f2_W, lbd),fontsize=18)
     plt.xlabel("Space [cell]",fontsize=16)
     plt.ylabel("t [iteration]",fontsize=16)
+    plt.savefig("results/spacetime_f2=%d_n=%d_t=%d_nruns=%d.png" % (f2_W,n,T-1,nruns), delimiter=",")
     toc = time.clock()
+
     return toc
 
 #Plot time (iterations) against density (per iteration) for different values of lambda in lambda_vec
@@ -75,7 +77,7 @@ def plot_time_density(n, T, nruns):
     for i in range(len(lambda_vec)):#loop over different lambdas
         print("Evaluating %d/%d lambdas" % (i+1,len(lambda_vec)))
         for k in range(0,nruns): #loop over different runs at fixed lambda
-            #print("Evaluating %d/%d runs" % (k+1,nruns))
+            print("Evaluating %d/%d runs" % (k+1,nruns))
             # take 1st element = density vector and put into i^th column
             d[i,:,k] = make_space_time_grid(lambda_vec[i], f2_bin, n, T, density_vec=True)[1]
 
@@ -97,8 +99,9 @@ def plot_time_density(n, T, nruns):
     plt.legend(lambda_vec,ncol=3,fontsize=13)
     toc = time.clock()
     #save output to file 
-    np.savetxt("f2=%d_n=%d_t=%d_nruns=%d_dens_avg.csv" % (f2_W,n,T-1,nruns), d_avgs, delimiter=",")
-    np.savetxt("f2=%d_n=%d_t=%d_nruns=%d_dens_std.csv"% (f2_W,n,T-1,nruns), d_stds, delimiter=",")
+    np.savetxt("results/f2=%d_n=%d_t=%d_nruns=%d_dens_avg.csv" % (f2_W,n,T-1,nruns), d_avgs, delimiter=",")
+    np.savetxt("results/f2=%d_n=%d_t=%d_nruns=%d_dens_std.csv"% (f2_W,n,T-1,nruns), d_stds, delimiter=",")
+    plt.savefig("results/density_time_f2=%d_n=%d_t=%d_nruns=%d.png" % (f2_W,n,T-1,nruns), delimiter=",")
 
     return toc, d_avgs, d_stds
 
@@ -114,6 +117,8 @@ def plot_lambda_density(n, T,nruns,d_avgs,d_stds):
     plt.xlabel("$\\lambda$",fontsize=16)
     plt.ylabel("$\\rho$(T=%d)"%(T-1),fontsize=16)
     toc = time.clock()
+    
+    plt.savefig("results/density_lambdas_f2=%d_n=%d_t=%d_nruns=%d.png" % (f2_W,n,T-1,nruns), delimiter=",")
     return toc
 
 #Simulation!
@@ -121,7 +126,7 @@ def plot_lambda_density(n, T,nruns,d_avgs,d_stds):
 #n = int(1e4) # number of columns/cells
 n = 1000
 #T = int(5e3) +1 # number rows/iterations
-T = 1000 +1 #leave the +1 here so that the time density plot "can't see" 
+T = 500 +1 #leave the +1 here so that the time density plot "can't see" 
 # the last initialized density vector which has 0 value
 nruns = 25 #nruns_per lambda
 
