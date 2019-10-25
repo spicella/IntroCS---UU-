@@ -5,11 +5,7 @@ import timeit
 import time
 plt.style.use('seaborn-darkgrid')
 
-#Parameters definition:
-
-# f1_W = 0 # f1 rule number
-# f1_bin = [int(x) for x in np.binary_repr(f1_W, width=8)] # binary representation of f1 rule
-# f1 = null rule, so don't need binary vector for it
+# Parameters definition:
 
 f2_W = 30 # f2 rule number
 f2_bin = [int(x) for x in np.binary_repr(f2_W, width=8)] # binary representation of f2 rule
@@ -49,7 +45,7 @@ def make_space_time_grid(lbd, f2_bin, n, T, density_vec = False):
             else:   # apply f2 rule so look at neighbors
                 #parse neighbors to int:
                 k = int("".join(str(int(x)) for x in grid[i, j:j+3]),2)
-                grid[i + 1, j + 1] = f2_bin[k]
+                grid[i + 1, j + 1] = f2_bin[7-k]
         if density_vec: # if True, keep track of this iteration's density
             d_vec[i] = np.count_nonzero(grid[i, 1:n+1] == 1)/n
     return grid, d_vec
